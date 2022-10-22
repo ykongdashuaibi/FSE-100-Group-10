@@ -1,0 +1,170 @@
+let currentActivity = 0;
+var score = 0;
+var x = 320;
+var y = 320;
+let greeting,input;
+let scoreText = "Score: " + score;
+let game1Button,game2Button,button1,homeButton,submitButton;
+let img, img1, img2, img3, img4, img5, img6, img7, img8, c;
+function preload() {
+  // preload() runs once
+  img = loadImage('https://images.everydayhealth.com/images/apples-101-about-1440x810.jpg');
+  console.log('image loaded');
+  img5 = loadImage('https://thumbs.dreamstime.com/b/lemon-fruit-icon-isolated-white-background-flat-style-vector-illustration-76688577.jpg');
+}
+
+function switchToMM(){
+  background(220);
+  currentActivity = 0;
+  
+  // Hide the home page button, show the activity buttons
+  homeButton.hide();
+  game1Button.show();
+  game2Button.show();
+  submitButton.hide();
+  greeting.hide();
+  input.hide();
+  button1.hide();
+}
+function setup() {
+  createCanvas(400, 400);
+  background(220);
+  //image(img, 50, 60, 200, 200);
+  
+  game1Button = createButton('Game 1');
+  game1Button.position(0, 0);
+  game1Button.mousePressed(game1Setup);
+  game1Button.show();
+  
+  game2Button = createButton('Game 2');
+  game2Button.position(0, 50);
+  game2Button.mousePressed(game2Setup);
+  game2Button.show();
+  
+  homeButton = createButton('Home');
+  homeButton.position(0, 100);
+  homeButton.mousePressed(switchToMM);
+  homeButton.show();
+  
+//game 1 
+  input = createInput();
+  input.position(20, 300)
+  submitButton = createButton('submit');
+ submitButton.position(input.x + input.width, 300);
+  greeting = createElement('h2', 'Please type your word here');
+  greeting.position(20, 315);
+
+  textAlign(CENTER);
+  textSize(50);
+  submitButton.mousePressed(greet);
+ submitButton.hide();
+  greeting.hide();
+  input.hide();
+
+  //game 2
+  button1 = createImg('https://thumbs.dreamstime.com/b/lemon-fruit-icon-isolated-white-background-flat-style-vector-illustration-76688577.jpg');
+   button1.position(x, y);
+  button1.size(50,50);
+  button1.mousePressed(randomLocation);
+ // textSize(20);
+ // text(scoreText, 330, 20);
+  button1.hide();
+  //text.hide();
+}
+let button;
+function game1Setup(){
+  clear();
+  background(220);
+
+  console.log('in game1 here')
+  background(220);
+  image(img, 20, 75, 200, 200);
+  currentActivity = 1;
+  game1Button.show();
+  game2Button.show();
+  
+  
+  submitButton.show();
+  greeting.show();
+  input.show();
+  button1.hide();
+}
+function greet() {
+  const word = input.value();
+  if (word === 'Apple'){
+  greeting.html('Your word ' + word + 'is correct !');
+  input.value('');
+  }
+  else if(word === 'apple'){
+  greeting.html('Your word ' + word + ' is correct !');
+  input.value('');   
+  }
+  else{
+   greeting.html('Your word ' + word + ' is wrong !');
+  input.value('');    
+  }
+}
+
+//game2 if time== 30, reset score and show game over.
+function game2Setup(){
+  console.log('in game2 here')
+  background(220);
+
+  // write code here to iterate through button   array, and type .remove on all ones
+  textSize(20);
+  text(scoreText, 330, 20);
+  //
+  currentActivity = 2;
+  game1Button.show();
+  game2Button.show();
+  homeButton.show();
+  submitButton.hide();
+  greeting.hide();
+  input.hide();
+  button1.show();
+}
+function game1Draw() {
+  // background(220);
+  // image(img, 20, 75, 200, 200);
+  
+}
+function game2Draw(){
+  
+}
+
+function mainMenu(){
+  currentActivity = 0;
+  background(220);
+  setup();
+  
+  submitButton.hide();
+  greeting.hide();
+  input.hide();
+ 
+}
+function draw() {  
+  switch(currentActivity){
+    case 0: 
+      mainMenu();
+      break;
+    case 1:
+      game1Setup();
+      break;
+      case 2:
+      game2Draw();
+      break;
+  }
+}
+
+
+function randomLocation() {
+  x = random(windowWidth/1.8)
+  y = random(windowHeight/1.8)
+  button1.position(x, y);
+  //bground = [random(10), random(20)];
+  score = score + 1
+  //timer = 50;
+}
+function mousePressed() {
+  
+}
