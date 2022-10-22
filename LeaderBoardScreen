@@ -1,0 +1,25 @@
+function lbScreenSetup()
+{
+  playButton.hide();
+  exitButton.hide();
+  lbButton.hide();
+  settingButton.hide();
+  
+  createCanvas(750, 500);
+  background(bColor);
+  
+  
+  
+  backButton = createButton("BACK");
+  backButton.position(275, 360);
+  backButton.size(200, 30);
+  backButton.mousePressed(settingBack2);
+}
+function settingBack2()
+{
+  playButton.show();
+  exitButton.show();
+  lbButton.show();
+  settingButton.show();
+  backButton.hide();
+}
